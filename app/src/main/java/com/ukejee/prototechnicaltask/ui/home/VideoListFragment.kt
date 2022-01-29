@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.ukejee.prototechnicaltask.R
 import com.ukejee.prototechnicaltask.data.api.Resource
 import com.ukejee.prototechnicaltask.data.api.Status
 import com.ukejee.prototechnicaltask.databinding.FragmentVideoListBinding
@@ -49,10 +50,10 @@ class VideoListFragment : Fragment() {
         binding.swipeLayout.setOnRefreshListener { viewModel.getAllVideos() }
         adapter.listener = { item ->
             viewModel.getSelectedVideo().value = item
-//            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-//            transaction.replace(R.id.fragmentContainer, HeadlineDetailsFragment())
-//            transaction.addToBackStack(null)
-//            transaction.commit()
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentContainer, VideoDetailsFragment())
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
     }
 
