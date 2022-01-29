@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.snackbar.Snackbar
+import com.ukejee.prototechnicaltask.R
 import com.ukejee.prototechnicaltask.databinding.FragmentLoginBinding
+import com.ukejee.prototechnicaltask.ui.home.VideoListFragment
 
 class LoginFragment : Fragment() {
 
@@ -34,7 +36,10 @@ class LoginFragment : Fragment() {
 
     private fun setupUi() {
         binding.loginButton.setOnClickListener {
-            viewModel.authenticateUser(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
+            viewModel.authenticateUser(
+                binding.emailEditText.text.toString(),
+                binding.passwordEditText.text.toString()
+            )
         }
     }
 
@@ -45,11 +50,23 @@ class LoginFragment : Fragment() {
     private fun observeData() {
         viewModel.getUserAuthenticated().observe(viewLifecycleOwner) { userAuthenticated ->
             if (userAuthenticated) {
-                Snackbar.make(requireContext(), binding.root, "Login Successful", Snackbar.LENGTH_LONG).show()
+                val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragmentContainer, VideoListFragment())
+                transaction.addToBackStack(null)
+                transaction.commit()
             } else {
-                Snackbar.make(requireContext(), binding.root, viewModel.getErrorMessage(), Snackbar.LENGTH_LONG).show()
+                Snackbar.make(
+                    requireContext(),
+                    binding.root,
+                    viewModel.getErrorMessage(),
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
