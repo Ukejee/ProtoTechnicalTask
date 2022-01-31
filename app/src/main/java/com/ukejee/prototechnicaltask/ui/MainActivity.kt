@@ -1,7 +1,8 @@
-package com.ukejee.prototechnicaltask
+package com.ukejee.prototechnicaltask.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ukejee.prototechnicaltask.R
 import com.ukejee.prototechnicaltask.ui.login.LoginFragment
 import dagger.hilt.android.AndroidEntryPoint
 

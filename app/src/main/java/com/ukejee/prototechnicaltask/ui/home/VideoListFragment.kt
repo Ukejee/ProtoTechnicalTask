@@ -45,6 +45,7 @@ class VideoListFragment : Fragment() {
 
     private fun setupUi() {
         adapter = VideoListRvAdapter()
+        adapter.activity = requireActivity()
         binding.videoList.adapter = adapter
         binding.videoList.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.swipeLayout.setOnRefreshListener { viewModel.getAllVideos() }

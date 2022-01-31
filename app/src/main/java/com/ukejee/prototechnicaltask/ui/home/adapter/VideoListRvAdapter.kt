@@ -1,6 +1,8 @@
 package com.ukejee.prototechnicaltask.ui.home.adapter
 
+import android.app.Activity
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +16,8 @@ class VideoListRvAdapter(): RecyclerView.Adapter<VideoListViewHolder>() {
 
     var listener: ((item: UIVideo) -> Unit)? = null
 
+    var activity: Activity? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoListViewHolder {
         val binding: ItemVideoBinding = ItemVideoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return VideoListViewHolder(binding)
@@ -21,7 +25,7 @@ class VideoListRvAdapter(): RecyclerView.Adapter<VideoListViewHolder>() {
 
     override fun onBindViewHolder(holder: VideoListViewHolder, position: Int) {
         val item = videoList[position]
-        holder.bind(item) { listener?.invoke(item) }
+        holder.bind(item, activity!!) { listener?.invoke(item) }
     }
 
     override fun getItemCount() = videoList.size

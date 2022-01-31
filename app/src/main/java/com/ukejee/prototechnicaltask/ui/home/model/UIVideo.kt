@@ -5,7 +5,8 @@ import com.ukejee.prototechnicaltask.data.api.videos.model.ApiGetVideoResponse
 data class UIVideo(
     val id: String,
     val image: String,
-    val duration: String
+    val duration: String,
+    val description: String
 ) {
 
     companion object {
@@ -17,7 +18,8 @@ data class UIVideo(
                 response.id.toString(),
                 response.images?.first { it.type.equals("thumbnail", true) }?.url
                     ?: DATA_NOT_AVAILABLE,
-                response.duration ?: DATA_NOT_AVAILABLE
+                response.duration ?: DATA_NOT_AVAILABLE,
+                response.description ?: DATA_NOT_AVAILABLE
             )
         }
     }
